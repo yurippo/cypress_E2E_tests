@@ -1,16 +1,30 @@
-//New Code refactored
+//New Code 2024
+
+import Signup from "../support/pages/signup-page/sign-up-page"
 
 describe('Singup Page', () => {
   it('Fill out correctly the fields of the singup page form to sucessfully register a new user', () => {
-    cy.visit('http://localhost:4200/')
-    cy.get('[data-test="register"]').click();
-    cy.get('input[data-test="email"]').type('lllll@lll.com');
-    cy.get('input[data-test="fullName"]').type('Lllll Lllll');
-    cy.get('input[data-test="registerUserName"]').type('lllllllll');
-    cy.get('input[data-test="registerPassword"]').type('LllllLllll');
-    cy.get('[data-test="btnRegister"]').click();
+    Signup.acessSignUpPage();
+    Signup.fillOutForm();
+    Signup.submitForm();    
+
   })
 })
+
+
+//New Code refactored
+
+// describe('Singup Page', () => {
+//   it('Fill out correctly the fields of the singup page form to sucessfully register a new user', () => {
+//     cy.visit('http://localhost:4200/')
+//     cy.get('[data-test="register"]').click();
+//     cy.get('input[data-test="email"]').type('lllll@lll.com');
+//     cy.get('input[data-test="fullName"]').type('Lllll Lllll');
+//     cy.get('input[data-test="registerUserName"]').type('lllllllll');
+//     cy.get('input[data-test="registerPassword"]').type('LllllLllll');
+//     cy.get('[data-test="btnRegister"]').click();
+//   })
+// })
 
 //with latest changes
 

@@ -210,3 +210,135 @@ describe('API Test Alurapic', () => {
 // Note que o teste funcionou, então conseguimos criar uma estratégia para manter os dados sensíveis seguros, evitando que eles sejam enviados para a integração quando fazemos um push para o GitHub, não sendo acessíveis para as demais pessoas da equipe.
 
 // A seguir, continuaremos a ver outras boas práticas para implementarmos em nossos testes.
+
+
+// Utilizamos um dublê de testes do tipo stub para simular situações e validar outras interações entre usuário e sistema, no nosso caso ele foi utilizado para interceptar uma requisição e garantir que dentro do contexto de caminho infeliz o retorno das requisições realizadas sempre sejam um erro.
+
+// Ocultamos dados dos usuários que antes estavam expostos durante as requisições, tornando a aplicação mais segura.
+
+// E por fim utilizamos uma massa de dados para dinamizar o preenchimento dos campos do formulário de cadastro.
+
+// Primeiro, implementamos um stub no nosso teste de login incorreto, para forçar um status de erro 400, na prática o nosso código ficou assim:
+
+// describe('Página de login', () => {
+
+//   beforeEach(() => {
+//       cy.visit('http://localhost:4200')
+      
+//       cy.intercept('POST', 'http://localhost:3000/user/login', {
+//           statusCode: 400
+//       }).as('stubPost')
+//   })
+  
+//     it('Deve preencher os campos do formulário corretamente e realizar login', () => {
+//       cy.login('carowl', '12345678');
+//       cy.wait('@stubPost');
+//     })   
+
+//   })
+
+
+//   Começamos a interagir com a API do projeto e criamos um novo arquivo chamado api-alurapic.cy.js e percebemos que ao analisar as requisições realizada, os dados sensíveis dos usuários estavam ficando expostos, e para corrigir isso criamos o arquivo cypress.env.json para armazenar os dados de login:
+
+//   {
+//     "userName": "carowl",
+//     "password": "12345678"
+// }
+
+// Após proteger os dados implementamos o código para interagir com a API, e o arquivo api-alurapic.cy.js ficou assim:
+
+// describe('Buscar fotos e dados', () => {
+
+//   it('buscar fotos do usuário', () => {        
+//       cy.request({
+//           method: 'POST' ,
+//           url: 'http://localhost:3000/user/login',
+//           body: Cypress.env()
+//       }).then((res) => {
+//           expect(res.status).to.be.equal(200)
+//           expect(res.body).is.not.empty
+//           expect(res.body).to.have.property('id')
+//           expect(res.body.id).to.be.equal(1)
+          
+//       })
+//   })
+// })
+
+// Por último, aprendemos a tornar o preenchimento de campos mais rápido utilizando massa de dados. Dentro da pasta fixtures criamos o arquivo usuarios.json com os seguintes dados:
+
+// [
+//   {
+//     "email": "peter.quill@alura.com.br",
+//     "fullName": "Peter Jason Quill",
+//     "userName": "senhor_das_estrelas",
+//     "password": "hibrido"
+//   },
+//   {
+//     "email": "gamora@alura.com.br",
+//     "fullName": "Gamora Zen Whoberi Ben Titan",
+//     "userName": "gamora",
+//     "password": "zenwhoberi"
+//   },
+//   {
+//     "email": "rocket.raccoon@alura.com.br",
+//     "fullName": "Rocket Raccoon",
+//     "userName": "rocket",
+//     "password": "mamifero"
+//   },
+//   {
+//     "email": "groot@alura.com.br",
+//     "fullName": "Groot",
+//     "userName": "groot",
+//     "password": "colossusfloral"
+//   } ,
+//   {
+//     "email": "drax@alura.com.br",
+//     "fullName": "Drax",
+//     "userName": "drax",
+//     "password": "humanoreforcado"
+//   },
+//   {
+//     "email": "youndu@alura.com.br",
+//     "fullName": "Yondu Udonta",
+//     "userName": "youndu",
+//     "password": "centauriano"
+//   }
+// ]
+
+// Também alteramos o arquivo de cadastro para acessar o json com a massa de dados de usuários e implementar o preenchimento do formulário com o array de dados:
+
+// describe('Página de cadastro', () => {
+
+//   beforeEach(() => {
+//       cy.visit('http://localhost:4200')
+//   }) 
+
+//       const usuarios = require('../fixtures/usuarios.json')
+//       usuarios.forEach(usuario => {
+          
+//           it('Deve preencher os campos do formulário corretamente para cadastrar um novo usuário ${usuario.userName}', () => {
+//               cy.get('[data-test="register"]').click();
+//               cy.get('[data-test="email"]').type(usuario.email);
+//               cy.get('input[data-test="fullName"]').type(usuario.fullName);
+//               cy.get('input[data-test="registerUserName"]').type(usuario.userName);
+//               cy.get('input[data-test="registerPassword"]').type(usuario.password);
+//               cy.get('[data-test="btnRegister"]').click();
+      
+//           })
+//       })
+
+       
+// })
+
+
+
+// introduzimos os conceitos de mocks e stubs, que são técnicas fundamentais para executar algumas verificações de forma controlada. Para aprimorar seus conhecimentos, leia o artigo Mocks e Stubs em testes: o que são e quais as diferenças que detalha como essas ferramentas auxiliam no processo de teste. 
+
+// https://www.alura.com.br/artigos/testes-com-mocks-e-stubs?_gl=1*mgydel*_ga*Mjg2MzU5OTU0LjE3MDc3NzE3MzU.*_ga_1EPWSW3PCS*MTcwODQ3NDc0NC44LjEuMTcwODQ3NTU3MC4wLjAuMA..*_fplc*ZTNKSXhGRmI0SWtSWmNJaGJJSmZzYWdNczByUXdRdW92Yllic043QmVCdGpFcm8wcFhhbXhwenZtR1BIQ3pmbkI5MnhVcXZHanduZkRNTWlqbktsd09EUkNJTGM2SFFRMkZOcTJzbWc1RVFMJTJCMllCYWJkMkZ0aWxaUjFmQkElM0QlM0Q.
+
+
+// O que aprendemos no projeto:
+
+// O conceito de mocks e stubs e a importância de usá-los;
+// Cuidados ao testar dados sensíveis, para não expor o conteúdo a quem não poderia ter acesso;
+// Utilizar dados de um arquivo externo nos casos de teste, fornecendo uma massa de dados.
