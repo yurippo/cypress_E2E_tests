@@ -11,7 +11,7 @@ describe('API Test Alurapic', () => {
            expect(res.status).to.be.equal(200) //here I expect the response of the status code 200 for right login //inside this function I make my API calls
            expect(res.body).is.not.empty //body cannot be empty
            expect(res.body).to.have.property('id') //expecting the response body brings an id from the user
-           expect(res.body.id).to.be.equal(5) // in case we're working with an user that has id = 5 for example
+           expect(res.body.id).to.be.equal(3) // in case we're working with an user that has id = 3 for example
 
          })  
     })
