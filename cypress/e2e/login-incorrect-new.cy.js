@@ -1,6 +1,8 @@
 //New Login Incorrect Test intercepting incorrect login request (wrong creds sent interacting with the Alura Pic API)
 //In this case we're not doing an interection with the user we're doing an API interection
 
+import { isBtcAddress } from "validator"
+
  describe('Login page', () => {
 
    beforeEach(() => {
@@ -186,4 +188,24 @@
 
 // Tudo correu como esperado, então podemos partir para o próximo teste!
 
+//BDD 
 
+// Durante o Projeto
+
+// nós criamos um dos cenários de testes para a funcionalidade de Login. Para isso, utilizamos a metodologia BDD - Behavior driven development (Desenvolvimento guiado por comportamento).
+
+// De acordo com a semântica do BDD, para tentativa de login com a senha incorreta.
+
+
+// Dado que há um usuário no sistema AluraPic, 
+// Quando ele digitar o username e a senha incorreta e clicar no botão para confirmar, 
+// Então deverá receber uma mensagem de senha incorreta.
+
+
+// A semântica para estruturar esse cenário de teste utiliza as palavras-chave dado, quando e então da seguinte maneira:
+
+// Dado - Pré-condições devem ser verdadeiras para que eu execute o teste?
+
+// Quando - Qual ação será executada no sistema que fornecerá o resultado validado?
+
+// Então: - De acordo com a ação disparada, qual será o resultado esperado?

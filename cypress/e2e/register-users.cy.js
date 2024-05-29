@@ -214,3 +214,18 @@ describe('Singup Page', () => {
 // https://docs.cypress.io/guides/references/best-practices
 
 // tem um compilado de boas práticas referentes à escrita dos testes. Essas sugestões e melhorias que a documentação apresenta, geralmente são embasadas no feedback da comunidade que utiliza a ferramenta diariamente, sejam profissionais de QA (quality assurance), quanto pessoas desenvolvedoras front-end, que também fazem muito uso do Cypress em seus testes. Sendo assim, vale a pena conferir os exemplos do que usar ou não na elaboração do script e sempre levar em consideração a documentação oficial como material de apoio.
+
+
+// A funcionalidade de cadastro pode conter inúmeros critérios de aceitação. 
+// Isso depende do que é combinado com o time durante a criação.
+// Exemplos de critérios de aceite que podemos ter para nossa aplicação: campo de nome e senha obrigatórios;
+//  em caso de sucesso, redirecionar para a página inicial;
+//   erro de senha três vezes e bloqueio por 15 minutos.
+//    Esses são os funcionais, os critérios de aceite podem também ser funcionais
+//    E claro, tem os outros requisitos não funcionais que podem existir tambem
+// //  Seguem alguns deles: * Senha de 8 caracteres, no mínimo.
+//   * Todos os campos devem ser obrigatórios. * 
+//  Exibir uma mensagem de confirmação quando o login for realizado.
+//   * Redirecionar o usuário para tela de login. * Exibir a mensagem de falha em caso de usuário já existente. 
+//  * Exibir mensagem de falha caso a confirmação de senha não seja igual a senha digitada anteriormente. 
+//  * * Exibir mensagem de falha caso o campo obrigatório esteja incompleto.
